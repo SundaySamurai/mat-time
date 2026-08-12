@@ -538,19 +538,7 @@ function TournamentsList() {
           <TournamentCard key={t.id} t={t} />
         ))}
       </div>
-      <p className="mt-5 text-xs text-[#5B6B5B]">
-        Checked quarterly, not weekly like the club schedules. For
-        registration, entry requirements, and full details, see the{" "}
-        <a
-          href={USAJUDO_LOCATOR}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2 text-[#8A6D3A] font-semibold"
-        >
-          USA Judo tournament locator
-        </a>
-        .
-      </p>
+      <p className="mt-5 text-xs text-[#5B6B5B]">Checked quarterly</p>
     </div>
   );
 }
