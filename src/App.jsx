@@ -374,7 +374,7 @@ function ClubCard({ club }) {
         ) : (
           <div className="flex items-start gap-2 text-sm italic" style={{ color: club.color }}>
             <Info size={16} className="mt-0.5 shrink-0" />
-            <span>No open mat hours logged yet. {club.notes}</span>
+            <span>No open mat hours logged yet.</span>
           </div>
         )}
       </div>
