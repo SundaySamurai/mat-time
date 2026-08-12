@@ -221,11 +221,25 @@ const USAJUDO_LOCATOR = "https://usajudo.sport80.com/e_locator/tournaments/find"
 
 const TOURNAMENTS = [
   {
+    id: "texas-judo-referee-clinic-2026",
+    name: "Texas Judo Referee Clinic",
+    date: "2026-08-22",
+    endDate: "2026-08-23",
+    location: "Plano, TX",
+  },
+  {
     id: "vet-open-houston-2026",
     name: "Veterans Open Houston",
     date: "2026-08-29",
     location: "Baytown, TX",
     sourceUrl: USAJUDO_LOCATOR,
+  },
+  {
+    id: "denton-kata-clinic-2026",
+    name: "Denton Kata Clinic",
+    date: "2026-08-29",
+    endDate: "2026-08-30",
+    location: "Denton, TX",
   },
   {
     id: "ohio-judo-champs-2026",
@@ -264,6 +278,12 @@ const TOURNAMENTS = [
     sourceUrl: USAJUDO_LOCATOR,
   },
   {
+    id: "go-shibata-memorial-2026",
+    name: "Go-Shibata Memorial",
+    date: "2026-10-24",
+    location: "Texas A&M",
+  },
+  {
     id: "denver-classic-2026",
     name: "2026 Denver Classic Judo Championship",
     date: "2026-11-07",
@@ -276,6 +296,19 @@ const TOURNAMENTS = [
     date: "2026-11-21",
     location: "Irving, TX",
     sourceUrl: USAJUDO_LOCATOR,
+  },
+  {
+    id: "presidents-cup-2026",
+    name: "President's Cup",
+    date: "2026-11-22",
+    location: "Irving, TX",
+  },
+  {
+    id: "texas-winter-camp-2026",
+    name: "Texas Winter Camp",
+    date: "2026-12-19",
+    endDate: "2026-12-20",
+    location: "Baytown, TX",
   },
   {
     id: "pan-am-adaptive-2027",
