@@ -226,12 +226,14 @@ const TOURNAMENTS = [
     date: "2026-08-22",
     endDate: "2026-08-23",
     location: "Plano, TX",
+    description: "Referee clinic and development opportunity for Texas Judo referees and officials.",
   },
   {
     id: "vet-open-houston-2026",
     name: "Veterans Open Houston",
     date: "2026-08-29",
     location: "Baytown, TX",
+    description: "Veterans judo competition. Event contact: Hector Negron.",
     sourceUrl: USAJUDO_LOCATOR,
   },
   {
@@ -240,6 +242,7 @@ const TOURNAMENTS = [
     date: "2026-08-29",
     endDate: "2026-08-30",
     location: "Denton, TX",
+    description: "Two-day kata development clinic. Event contact: Doug Newcomer.",
   },
   {
     id: "ohio-judo-champs-2026",
@@ -253,6 +256,7 @@ const TOURNAMENTS = [
     name: "Becerra Judo Championship",
     date: "2026-09-12",
     location: "Plano, TX",
+    description: "Annual Texas judo competition honoring the Becerra legacy.",
     sourceUrl: USAJUDO_LOCATOR,
   },
   {
@@ -282,6 +286,7 @@ const TOURNAMENTS = [
     name: "Go-Shibata Memorial",
     date: "2026-10-24",
     location: "Texas A&M",
+    description: "Memorial judo tournament hosted at Texas A&M. Event contact: Bob Perez.",
   },
   {
     id: "denver-classic-2026",
@@ -295,6 +300,7 @@ const TOURNAMENTS = [
     name: "60th Annual Dallas Open",
     date: "2026-11-21",
     location: "Irving, TX",
+    description: "Open judo competition for athletes from across Texas and surrounding regions.",
     sourceUrl: USAJUDO_LOCATOR,
   },
   {
@@ -302,6 +308,7 @@ const TOURNAMENTS = [
     name: "President's Cup",
     date: "2026-11-22",
     location: "Irving, TX",
+    description: "Texas judo competition held during the Dallas tournament weekend.",
   },
   {
     id: "texas-winter-camp-2026",
@@ -309,6 +316,7 @@ const TOURNAMENTS = [
     date: "2026-12-19",
     endDate: "2026-12-20",
     location: "Baytown, TX",
+    description: "Two-day winter judo training camp. Event contacts: Ramon Torres and Christopher Graves.",
   },
   {
     id: "pan-am-adaptive-2027",
@@ -500,6 +508,12 @@ function TournamentCard({ t }) {
         <MapPin size={16} className="mt-0.5 shrink-0" />
         <span>{t.location}</span>
       </div>
+
+      {t.description && (
+        <p className="mt-3 pt-3 border-t border-[#1B2A20]/15 text-sm text-[#5B6B5B]">
+          {t.description}
+        </p>
+      )}
     </div>
   );
 }
