@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MapPin, Clock, Info, Users, Calendar, Trophy } from "lucide-react";
+import { MapPin, Clock, Sunrise, Info, Users, Calendar, Trophy } from "lucide-react";
 
 // ---- DATA ----
 // This is the only part that changes week to week.
@@ -329,6 +329,9 @@ const TOURNAMENTS = [
 
 const DAY_ORDER = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+// Sessions starting before this get the morning highlight (sunrise icon + amber tint).
+const MORNING_CUTOFF_MINUTES = 9 * 60;
+
 function timeToMinutes(t) {
   const m = t.match(/(\d+):(\d+)\s*(AM|PM)/i);
   if (!m) return 0;
@@ -451,29 +454,38 @@ function WeekAgenda({ clubs }) {
               {day}
             </h4>
             <div className="space-y-2">
-              {daySessions.map((s, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 border-2 border-[#1B2A20] bg-[#F6F4EC] pl-3 pr-4 py-3"
-                  style={{ borderLeftColor: s.club.color, borderLeftWidth: 6 }}
-                >
-                  <Clock size={16} className="shrink-0" style={{ color: s.club.color }} />
-                  <div className="flex-1">
-                    <div className="font-semibold text-[#1B2A20]">
-                      {s.start} – {s.end}
+              {daySessions.map((s, i) => {
+                const isMorning = timeToMinutes(s.start) < MORNING_CUTOFF_MINUTES;
+                return (
+                  <div
+                    key={i}
+                    className={`flex items-center gap-3 border-2 border-[#1B2A20] pl-3 pr-4 py-3 ${
+                      isMorning ? "bg-[#F7EAC3]" : "bg-[#F6F4EC]"
+                    }`}
+                    style={{ borderLeftColor: s.club.color, borderLeftWidth: 6 }}
+                  >
+                    {isMorning ? (
+                      <Sunrise size={16} className="shrink-0" style={{ color: s.club.color }} />
+                    ) : (
+                      <Clock size={16} className="shrink-0" style={{ color: s.club.color }} />
+                    )}
+                    <div className="flex-1">
+                      <div className="font-semibold text-[#1B2A20]">
+                        {s.start} – {s.end}
+                      </div>
+                      <div className="text-sm text-[#5B6B5B]">{s.club.name}</div>
                     </div>
-                    <div className="text-sm text-[#5B6B5B]">{s.club.name}</div>
+                    {s.label && (
+                      <span
+                        className="shrink-0 text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 border"
+                        style={{ borderColor: s.club.color, color: s.club.color }}
+                      >
+                        {s.label}
+                      </span>
+                    )}
                   </div>
-                  {s.label && (
-                    <span
-                      className="shrink-0 text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 border"
-                      style={{ borderColor: s.club.color, color: s.club.color }}
-                    >
-                      {s.label}
-                    </span>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         );
