@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react";
-import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, Trophy } from "lucide-react";
+import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign, Trophy } from "lucide-react";
 
 // ---- DATA ----
 // This is the only part that changes week to week.
 // Edit the CLUBS or TOURNAMENTS array below, commit, and push. No in-app editing.
 // session.type: "open_mat" (drop-in randori) or "class" (regular structured training)
+// club.matFee: optional, e.g. "$15 mat fee" — include going forward whenever a club's
+// site mentions a drop-in/trial-class fee.
 const CITIES = [
   "San Antonio",
   "Austin",
@@ -73,6 +75,7 @@ const CLUBS = [
     coach: "Rick Cockerham & Henry Bruns",
     address: "2913 Northland Dr, Austin, TX 78757",
     color: "#8A6D3A",
+    matFee: "$15 mat fee",
     sessions: [
       { day: "Monday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Teaching" },
       { day: "Monday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Practice/Cardio" },
@@ -95,22 +98,6 @@ const CLUBS = [
       { day: "Saturday", start: "10:30 AM", end: "3:00 PM", type: "class" },
     ],
     notes: "",
-    verified: "Aug 2026",
-  },
-  {
-    id: "texas-judo-ut",
-    city: "Austin",
-    name: "Texas Judo (UT Austin)",
-    coach: "",
-    address: "RSC 1.138, 2001 San Jacinto Blvd, Austin, TX 78712",
-    color: "#6B7A3B",
-    sessions: [
-      { day: "Monday", start: "6:00 PM", end: "8:00 PM", type: "class" },
-      { day: "Wednesday", start: "6:00 PM", end: "8:00 PM", type: "class" },
-      { day: "Friday", start: "6:00 PM", end: "8:00 PM", type: "class" },
-      { day: "Sunday", start: "11:00 AM", end: "1:00 PM", type: "class" },
-    ],
-    notes: "Student-led UT recreational sports club, open to students and faculty of all skill levels.",
     verified: "Aug 2026",
   },
   // ---- Waco ----
@@ -575,6 +562,13 @@ function ClubCard({ club }) {
         <span>{club.address}</span>
       </div>
 
+      {club.matFee && (
+        <div className="mt-2 flex items-start gap-2 text-sm text-[#3D4A3D]">
+          <DollarSign size={16} className="mt-0.5 shrink-0" />
+          <span>{club.matFee}</span>
+        </div>
+      )}
+
       <div className="mt-4 border-t border-[#1B2A20]/15 pt-4">
         {hasSessions ? (
           <ul className="space-y-2">
@@ -669,6 +663,7 @@ function WeekAgenda({ clubs }) {
                       <div className="text-sm text-[#5B6B5B]">
                         {s.club.name}
                         {s.instructor && ` · ${s.instructor}`}
+                        {s.club.matFee && ` · ${s.club.matFee}`}
                       </div>
                     </div>
                     {s.label && (
