@@ -6,7 +6,8 @@ import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign
 // Edit the CLUBS or TOURNAMENTS array below, commit, and push. No in-app editing.
 // session.type: "open_mat" (drop-in randori) or "class" (regular structured training)
 // club.matFee: optional, e.g. "$15 mat fee" — include going forward whenever a club's
-// site mentions a drop-in/trial-class fee.
+// site mentions a drop-in/trial-class fee. session.matFee overrides it for one session
+// (e.g. a specific free class) — shown in the Class Schedule tab only.
 const CITIES = [
   "San Antonio",
   "Austin",
@@ -61,6 +62,7 @@ const CLUBS = [
     coach: "Nina Cutro-Kelly",
     address: "4523 N Loop 1604 W, Ste 103, San Antonio, TX 78249",
     color: "#6B7A3B", // green belt
+    matFee: "$50 drop-in",
     sessions: [
       { day: "Tuesday", start: "7:15 PM", end: "8:15 PM", type: "class" },
       { day: "Friday", start: "6:00 PM", end: "7:00 PM", type: "class" },
@@ -126,13 +128,14 @@ const CLUBS = [
     coach: "",
     address: "20527 FM-1093 E, Unit A-5, Richmond, TX 77407",
     color: "#8A6D3A",
+    matFee: "$15 drop-in",
     sessions: [
       { day: "Tuesday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Kids/Beginners" },
       { day: "Tuesday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Adult" },
       { day: "Thursday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Kids/Beginners" },
       { day: "Thursday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Adult" },
       { day: "Saturday", start: "10:00 AM", end: "11:00 AM", type: "class", label: "Kids/Beginners" },
-      { day: "Saturday", start: "11:00 AM", end: "12:30 PM", type: "class", label: "Adult" },
+      { day: "Saturday", start: "11:00 AM", end: "12:30 PM", type: "class", label: "Teen/Adult Randori", matFee: "Free" },
     ],
     notes: "",
     verified: "Aug 2026",
@@ -665,7 +668,7 @@ function WeekAgenda({ clubs }) {
                       <div className="text-sm text-[#5B6B5B]">
                         {s.club.name}
                         {s.instructor && ` · ${s.instructor}`}
-                        {s.club.matFee && ` · ${s.club.matFee}`}
+                        {(s.matFee ?? s.club.matFee) && ` · ${s.matFee ?? s.club.matFee}`}
                       </div>
                     </div>
                     {s.label && (
