@@ -124,7 +124,7 @@ const CLUBS = [
     sessions: [
       { day: "Monday", start: "8:30 PM", end: "9:30 PM", type: "class", label: "Adult" },
       { day: "Wednesday", start: "8:30 PM", end: "9:30 PM", type: "class", label: "Adult" },
-      { day: "Friday", start: "7:00 PM", end: "8:30 PM", type: "class", label: "No-Gi" },
+      { day: "Friday", start: "7:00 PM", end: "8:30 PM", type: "class", label: "Adult" },
       { day: "Saturday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Family, 7+" },
     ],
     notes: "The only dedicated judo club in the Waco area, per their own site. Kids-only classes (ages 7-12) excluded.",
