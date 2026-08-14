@@ -2,8 +2,9 @@
 
 A no-account, no-sign-up schedule tracker for judo clubs and tournaments
 across Texas (San Antonio, Austin, Waco, Houston, Dallas), New York City,
-and New Jersey (Warren, Cranford). Three tabs: open mat drop-in hours,
-full weekly class schedules, and upcoming tournaments.
+and Central NJ (Warren, Cranford — grouped together since they're about
+10-12 miles apart). Three tabs: open mat drop-in hours, full weekly class
+schedules, and upcoming tournaments.
 
 Hours are manually verified against each club's own site/socials, not
 scraped — see the "Checked" date on each card.
@@ -48,13 +49,13 @@ by design — to update the site:
 - **Kokushi Budo Institute** (New York, NY): only Monday, Wednesday,
   Thursday, and Friday were visible in the source schedule. Tuesday,
   Saturday, and Sunday are unconfirmed, not "closed."
-- **Colton Brown Training Center** (Warren, NJ): only Monday–Thursday and
-  Saturday were visible in the source schedule. Friday and Sunday are
-  unconfirmed, not "closed."
-- **Cranford JKC-Yonezuka Dojo** (Cranford, NJ): no instructor names were
-  listed in the source schedule, and the source only gives start times —
-  all sessions are shown as 1-hour blocks, which may not match actual
-  class length.
+- **Colton Brown Training Center** (Central NJ / Warren): only
+  Monday–Thursday and Saturday were visible in the source schedule.
+  Friday and Sunday are unconfirmed, not "closed."
+- **Cranford JKC-Yonezuka Dojo** (Central NJ / Cranford): no instructor
+  names were listed in the source schedule, and the source only gives
+  start times — all sessions are shown as 1-hour blocks, which may not
+  match actual class length.
 - No feedback/suggestion form is wired up yet.
 
 ## Maintenance

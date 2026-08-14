@@ -12,8 +12,7 @@ const CITIES = [
   "Houston",
   "Dallas",
   "New York, NY",
-  "Warren, NJ",
-  "Cranford, NJ",
+  "Central NJ",
 ];
 
 const CLUBS = [
@@ -240,10 +239,10 @@ const CLUBS = [
     notes: "Judo only — their BJJ class and Kids Judo classes excluded. Tuesday, Saturday, and Sunday hours not visible in source schedule.",
     verified: "Aug 2026",
   },
-  // ---- Warren, NJ ----
+  // ---- Central NJ ----
   {
     id: "colton-brown-warren",
-    city: "Warren, NJ",
+    city: "Central NJ",
     name: "Colton Brown Training Center",
     coach: "",
     address: "10 Community Place, Suite 6, Warren, NJ 07059",
@@ -260,10 +259,9 @@ const CLUBS = [
     notes: "Judo only. Friday and Sunday hours not visible in source schedule.",
     verified: "Aug 2026",
   },
-  // ---- Cranford, NJ ----
   {
     id: "cranford-jkc",
-    city: "Cranford, NJ",
+    city: "Central NJ",
     name: "Cranford JKC-Yonezuka Dojo",
     coach: "",
     address: "107 S Ave W, Cranford, NJ 07016",
