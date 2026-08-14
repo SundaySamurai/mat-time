@@ -337,6 +337,13 @@ const TOURNAMENTS = [
     sourceUrl: USAJUDO_LOCATOR,
   },
   {
+    id: "albert-tagawa-judo-championship-2026",
+    name: "2026 Albert Tagawa Judo Championship",
+    date: "2026-10-03",
+    location: "Denver, CO",
+    description: "USA Judo sanctioned event at the Denver Buddhist Temple. Register at smoothcomp.com.",
+  },
+  {
     id: "shogun-showdown-2026",
     name: "Shogun Showdown Championship",
     date: "2026-10-03",
