@@ -5,7 +5,16 @@ import { MapPin, Clock, Sunrise, Info, Users, Calendar, Trophy } from "lucide-re
 // This is the only part that changes week to week.
 // Edit the CLUBS or TOURNAMENTS array below, commit, and push. No in-app editing.
 // session.type: "open_mat" (drop-in randori) or "class" (regular structured training)
-const CITIES = ["San Antonio", "Austin", "Waco", "Houston", "Dallas"];
+const CITIES = [
+  "San Antonio",
+  "Austin",
+  "Waco",
+  "Houston",
+  "Dallas",
+  "New York, NY",
+  "Warren, NJ",
+  "Cranford, NJ",
+];
 
 const CLUBS = [
   {
@@ -209,6 +218,66 @@ const CLUBS = [
       { day: "Saturday", start: "10:00 AM", end: "11:30 AM", type: "class", label: "Adult Competition" },
     ],
     notes: "Kids-only classes excluded (Pee-Wee, Kid's Judo, Tournament Practice/bantam). Friday and Sunday hours not visible in source screenshots.",
+    verified: "Aug 2026",
+  },
+  // ---- New York ----
+  {
+    id: "kokushi-budo-nyc",
+    city: "New York, NY",
+    name: "Kokushi Budo Institute",
+    coach: "",
+    address: "331 Riverside Dr, New York, NY 10025",
+    color: "#3B5B7A",
+    sessions: [
+      { day: "Monday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Fundamentals", instructor: "Ben Davidson" },
+      { day: "Monday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Advanced", instructor: "Shintaro Higashi" },
+      { day: "Wednesday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Advanced", instructor: "Shintaro Higashi" },
+      { day: "Thursday", start: "6:00 PM", end: "7:00 PM", type: "class", label: "Fundamentals", instructor: "Eugene Seki" },
+      { day: "Friday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Fundamentals", instructor: "Eugene Seki" },
+      { day: "Friday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Fundamentals", instructor: "Shintaro Higashi" },
+      { day: "Friday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Advanced", instructor: "Shintaro Higashi" },
+    ],
+    notes: "Judo only — their BJJ class and Kids Judo classes excluded. Tuesday, Saturday, and Sunday hours not visible in source schedule.",
+    verified: "Aug 2026",
+  },
+  // ---- Warren, NJ ----
+  {
+    id: "colton-brown-warren",
+    city: "Warren, NJ",
+    name: "Colton Brown Training Center",
+    coach: "",
+    address: "10 Community Place, Suite 6, Warren, NJ 07059",
+    color: "#8A6D3A",
+    sessions: [
+      { day: "Monday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Adult", instructor: "Colton Brown" },
+      { day: "Tuesday", start: "6:40 PM", end: "7:40 PM", type: "class", label: "Teen/Adult Fundamentals", instructor: "Jeff Brown" },
+      { day: "Tuesday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Adult", instructor: "Colton Brown" },
+      { day: "Wednesday", start: "6:30 AM", end: "7:30 AM", type: "class", label: "Adult", instructor: "Colton Brown" },
+      { day: "Wednesday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Adult", instructor: "Colton Brown" },
+      { day: "Thursday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Masters", instructor: "Colton Brown" },
+      { day: "Saturday", start: "10:30 AM", end: "11:30 AM", type: "class", label: "Adult", instructor: "Colton Brown" },
+    ],
+    notes: "Judo only. Friday and Sunday hours not visible in source schedule.",
+    verified: "Aug 2026",
+  },
+  // ---- Cranford, NJ ----
+  {
+    id: "cranford-jkc",
+    city: "Cranford, NJ",
+    name: "Cranford JKC-Yonezuka Dojo",
+    coach: "",
+    address: "107 S Ave W, Cranford, NJ 07016",
+    color: "#6B7A3B",
+    sessions: [
+      { day: "Monday", start: "6:00 PM", end: "7:00 PM", type: "class", label: "Competition Team" },
+      { day: "Monday", start: "7:00 PM", end: "8:00 PM", type: "class", label: "Adult" },
+      { day: "Wednesday", start: "7:00 PM", end: "8:00 PM", type: "class", label: "Adult" },
+      { day: "Thursday", start: "6:00 PM", end: "7:00 PM", type: "class", label: "Competition Team" },
+      { day: "Thursday", start: "7:00 PM", end: "8:00 PM", type: "class", label: "Adult" },
+      { day: "Saturday", start: "10:30 AM", end: "11:30 AM", type: "class", label: "Fundamental" },
+      { day: "Saturday", start: "11:30 AM", end: "12:30 PM", type: "class", label: "Adult" },
+    ],
+    notes: "Judo only — their Karate classes and Youth Judo excluded. No instructor names listed in source schedule. Sessions shown as 1 hour each; source schedule lists start times only.",
     verified: "Aug 2026",
   },
 ];
@@ -474,7 +543,10 @@ function WeekAgenda({ clubs }) {
                       <div className="font-semibold text-[#1B2A20]">
                         {s.start} – {s.end}
                       </div>
-                      <div className="text-sm text-[#5B6B5B]">{s.club.name}</div>
+                      <div className="text-sm text-[#5B6B5B]">
+                        {s.club.name}
+                        {s.instructor && ` · ${s.instructor}`}
+                      </div>
                     </div>
                     {s.label && (
                       <span
@@ -567,7 +639,7 @@ export default function App() {
       <div className="mx-auto max-w-md px-4 py-8 sm:max-w-xl">
         <header className="mb-6">
           <p className="text-xs uppercase tracking-[0.2em] text-[#8A6D3A] font-semibold mb-1">
-            Texas
+            TX · NJ · NY
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl leading-none tracking-tight">
             Mat Time
