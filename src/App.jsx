@@ -26,6 +26,7 @@ const CLUBS = [
     coach: "Coach Jerry Koch",
     address: "2424 Freedom Dr, San Antonio, TX 78217",
     color: "#8A6D3A", // brown belt
+    matFee: "$35 drop-in",
     sessions: [
       { day: "Monday", start: "6:30 AM", end: "8:00 AM", type: "class", label: "Co-ed" },
       { day: "Monday", start: "6:00 PM", end: "7:30 PM", type: "class", label: "Ladies only" },
@@ -215,6 +216,7 @@ const CLUBS = [
     coach: "",
     address: "331 Riverside Dr, New York, NY 10025",
     color: "#3B5B7A",
+    matFee: "$40 drop-in",
     sessions: [
       { day: "Monday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Fundamentals", instructor: "Ben Davidson" },
       { day: "Monday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Advanced", instructor: "Shintaro Higashi" },
