@@ -2,9 +2,10 @@
 
 A no-account, no-sign-up schedule tracker for judo clubs and tournaments
 across Texas (San Antonio, Austin, Waco, Houston, Dallas), New York City,
-and Central NJ (Warren, Cranford — grouped together since they're about
-10-12 miles apart). Three tabs: open mat drop-in hours, full weekly class
-schedules, and upcoming tournaments.
+Glenville NY (Jason Morris Judo Center, upstate), and Central NJ (Warren,
+Cranford — grouped together since they're about 10-12 miles apart). Three
+tabs: open mat drop-in hours, full weekly class schedules, and upcoming
+tournaments.
 
 Hours are manually verified against each club's own site/socials, not
 scraped — see the "Checked" date on each card.
@@ -56,10 +57,20 @@ by design — to update the site:
   names were listed in the source schedule, and the source only gives
   start times — all sessions are shown as 1-hour blocks, which may not
   match actual class length.
+- **Oishi Judo** (New York, NY): adult class times are start-time only on
+  their site (no end times), shown here as 1-hour blocks — actual
+  duration not confirmed. Andrew Pernambuco and Jeff Summa alternate
+  teaching Mon/Tue/Thu; which one teaches which day isn't specified.
+- **Kano Martial Arts** (New York, NY): only pure "Judo"/"Judo Basics"
+  sessions are included — their mixed "GI (Judo + BJJ)" classes were
+  excluded by request. The source schedule screenshot was cut off at the
+  bottom, so some evening sessions may be missing.
+- **Jason Morris Judo Center** (Glenville, NY): no instructor names
+  listed on their site.
 - No feedback/suggestion form is wired up yet.
 
 ## Maintenance
 
 - Club schedules: checked quarterly
 - Tournaments: checked quarterly
-- 14 clubs across Texas, New York, and New Jersey as of Aug 2026
+- 17 clubs across Texas, New York, and New Jersey as of Aug 2026
