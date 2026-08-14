@@ -330,7 +330,8 @@ const TOURNAMENTS = [
 const DAY_ORDER = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 // Sessions starting before this get the morning highlight (sunrise icon + amber tint).
-const MORNING_CUTOFF_MINUTES = 9 * 60;
+// 10:30 catches Eastside Dojo's 9:00 AM classes without pulling in 11am+ lunchtime sessions.
+const MORNING_CUTOFF_MINUTES = 10 * 60 + 30;
 
 function timeToMinutes(t) {
   const m = t.match(/(\d+):(\d+)\s*(AM|PM)/i);
