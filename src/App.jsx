@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MapPin, Clock, Sunrise, Info, Users, Calendar, Trophy } from "lucide-react";
+import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, Trophy } from "lucide-react";
 
 // ---- DATA ----
 // This is the only part that changes week to week.
@@ -435,6 +435,56 @@ function allSessionsByType(clubs, type) {
   return out;
 }
 
+function timezoneForCity(city) {
+  return city.endsWith("NJ") || city.endsWith("NY") ? "America/New_York" : "America/Chicago";
+}
+
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+
+// Next upcoming date (today included) that falls on the given weekday name.
+function nextDateForDay(dayName) {
+  const targetIdx = DAY_ORDER.indexOf(dayName);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diff = (targetIdx - today.getDay() + 7) % 7;
+  today.setDate(today.getDate() + diff);
+  return today;
+}
+
+// Google Calendar "quick add" link, pre-filled as weekly recurring — the
+// recurrence field on Google's own Add Event screen is still editable, so
+// a one-time visitor can switch it to "Does not repeat" before saving.
+function googleCalendarUrl(session, club) {
+  const date = nextDateForDay(session.day);
+  const dateStr = `${date.getFullYear()}${pad2(date.getMonth() + 1)}${pad2(date.getDate())}`;
+  const startMin = timeToMinutes(session.start);
+  const endMin = timeToMinutes(session.end);
+  const toHHMMSS = (mins) => `${pad2(Math.floor(mins / 60))}${pad2(mins % 60)}00`;
+  const dates = `${dateStr}T${toHHMMSS(startMin)}/${dateStr}T${toHHMMSS(endMin)}`;
+
+  const title = session.label ? `${club.name} — ${session.label}` : club.name;
+  const details = [
+    session.instructor ? `Instructor: ${session.instructor}` : null,
+    club.notes || null,
+    "Via Mat Time — hours change without notice, call ahead to confirm.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: title,
+    dates,
+    details,
+    location: club.address,
+    ctz: timezoneForCity(club.city),
+    recur: "RRULE:FREQ=WEEKLY",
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
 function ClubCard({ club }) {
   const openMatSessions = club.sessions.filter((s) => s.type === "open_mat");
   const hasSessions = openMatSessions.length > 0;
@@ -482,6 +532,16 @@ function ClubCard({ club }) {
                       {s.label}
                     </span>
                   )}
+                  <a
+                    href={googleCalendarUrl(s, club)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Add ${club.name} ${s.day} session to Google Calendar`}
+                    className="ml-auto shrink-0"
+                    style={{ color: club.color }}
+                  >
+                    <CalendarPlus size={18} />
+                  </a>
                 </li>
               ))}
           </ul>
@@ -556,6 +616,16 @@ function WeekAgenda({ clubs }) {
                         {s.label}
                       </span>
                     )}
+                    <a
+                      href={googleCalendarUrl(s, s.club)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Add ${s.club.name} ${s.day} class to Google Calendar`}
+                      className="shrink-0"
+                      style={{ color: s.club.color }}
+                    >
+                      <CalendarPlus size={18} />
+                    </a>
                   </div>
                 );
               })}
