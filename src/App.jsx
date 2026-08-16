@@ -5,9 +5,10 @@ import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign
 // This is the only part that changes week to week.
 // Edit the CLUBS or TOURNAMENTS array below, commit, and push. No in-app editing.
 // session.type: "open_mat" (drop-in randori) or "class" (regular structured training)
-// club.matFee: optional, e.g. "$15 mat fee" — include going forward whenever a club's
-// site mentions a drop-in/trial-class fee. session.matFee overrides it for one session
-// (e.g. a specific free class) — shown in the Class Schedule tab only.
+// club.matFee: optional, e.g. "$15 drop-in fee" — always phrase it "drop-in fee" for
+// consistency. Include going forward whenever a club's site mentions one. session.matFee
+// overrides it for one session (e.g. a specific free class) — shown in the Class
+// Schedule tab only.
 const CITIES = [
   "San Antonio",
   "Austin",
@@ -27,7 +28,7 @@ const CLUBS = [
     coach: "Coach Jerry Koch",
     address: "2424 Freedom Dr, San Antonio, TX 78217",
     color: "#8A6D3A", // brown belt
-    matFee: "$35 drop-in",
+    matFee: "$35 drop-in fee",
     sessions: [
       { day: "Monday", start: "6:30 AM", end: "8:00 AM", type: "class", label: "Co-ed" },
       { day: "Monday", start: "6:00 PM", end: "7:30 PM", type: "class", label: "Ladies only" },
@@ -62,7 +63,7 @@ const CLUBS = [
     coach: "Nina Cutro-Kelly",
     address: "4523 N Loop 1604 W, Ste 103, San Antonio, TX 78249",
     color: "#6B7A3B", // green belt
-    matFee: "$50 drop-in",
+    matFee: "$50 drop-in fee",
     sessions: [
       { day: "Tuesday", start: "7:15 PM", end: "8:15 PM", type: "class" },
       { day: "Friday", start: "6:00 PM", end: "7:00 PM", type: "class" },
@@ -78,7 +79,7 @@ const CLUBS = [
     coach: "Rick Cockerham & Henry Bruns",
     address: "2913 Northland Dr, Austin, TX 78757",
     color: "#8A6D3A",
-    matFee: "$15 mat fee",
+    matFee: "$15 drop-in fee",
     sessions: [
       { day: "Monday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Teaching" },
       { day: "Monday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Practice/Cardio" },
@@ -128,7 +129,7 @@ const CLUBS = [
     coach: "",
     address: "20527 FM-1093 E, Unit A-5, Richmond, TX 77407",
     color: "#8A6D3A",
-    matFee: "$15 drop-in",
+    matFee: "$15 drop-in fee",
     sessions: [
       { day: "Tuesday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Kids/Beginners" },
       { day: "Tuesday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Adult" },
@@ -219,7 +220,7 @@ const CLUBS = [
     coach: "",
     address: "331 Riverside Dr, New York, NY 10025",
     color: "#3B5B7A",
-    matFee: "$40 drop-in",
+    matFee: "$40 drop-in fee",
     sessions: [
       { day: "Monday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Fundamentals", instructor: "Ben Davidson" },
       { day: "Monday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Advanced", instructor: "Shintaro Higashi" },
@@ -542,7 +543,6 @@ function googleCalendarUrl(session, club) {
 
 function ClubCard({ club }) {
   const openMatSessions = club.sessions.filter((s) => s.type === "open_mat");
-  const hasSessions = openMatSessions.length > 0;
 
   return (
     <div className="rounded-none border-2 border-[#1B2A20] bg-[#F6F4EC] p-5 sm:p-6">
@@ -575,44 +575,37 @@ function ClubCard({ club }) {
       )}
 
       <div className="mt-4 border-t border-[#1B2A20]/15 pt-4">
-        {hasSessions ? (
-          <ul className="space-y-2">
-            {[...openMatSessions]
-              .sort((a, b) => DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day))
-              .map((s, i) => (
-                <li key={i} className="flex items-center gap-2 text-[#1B2A20] flex-wrap">
-                  <Clock size={16} className="shrink-0" style={{ color: club.color }} />
-                  <span className="font-semibold">{s.day}</span>
-                  <span className="text-[#3D4A3D]">
-                    {s.start} – {s.end}
-                  </span>
-                  {s.label && (
-                    <span
-                      className="text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 border"
-                      style={{ borderColor: club.color, color: club.color }}
-                    >
-                      {s.label}
-                    </span>
-                  )}
-                  <a
-                    href={googleCalendarUrl(s, club)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Add ${club.name} ${s.day} session to Google Calendar`}
-                    className="ml-auto shrink-0"
-                    style={{ color: club.color }}
+        <ul className="space-y-2">
+          {[...openMatSessions]
+            .sort((a, b) => DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day))
+            .map((s, i) => (
+              <li key={i} className="flex items-center gap-2 text-[#1B2A20] flex-wrap">
+                <Clock size={16} className="shrink-0" style={{ color: club.color }} />
+                <span className="font-semibold">{s.day}</span>
+                <span className="text-[#3D4A3D]">
+                  {s.start} – {s.end}
+                </span>
+                {s.label && (
+                  <span
+                    className="text-[10px] uppercase tracking-wide font-semibold px-1.5 py-0.5 border"
+                    style={{ borderColor: club.color, color: club.color }}
                   >
-                    <CalendarPlus size={18} />
-                  </a>
-                </li>
-              ))}
-          </ul>
-        ) : (
-          <div className="flex items-start gap-2 text-sm italic" style={{ color: club.color }}>
-            <Info size={16} className="mt-0.5 shrink-0" />
-            <span>No open mat hours logged yet.</span>
-          </div>
-        )}
+                    {s.label}
+                  </span>
+                )}
+                <a
+                  href={googleCalendarUrl(s, club)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Add ${club.name} ${s.day} session to Google Calendar`}
+                  className="ml-auto shrink-0"
+                  style={{ color: club.color }}
+                >
+                  <CalendarPlus size={18} />
+                </a>
+              </li>
+            ))}
+        </ul>
       </div>
     </div>
   );
@@ -766,6 +759,10 @@ export default function App() {
   const [tab, setTab] = useState("open_mat");
 
   const cityClubs = useMemo(() => CLUBS.filter((c) => c.city === city), [city]);
+  const openMatClubs = useMemo(
+    () => cityClubs.filter((c) => c.sessions.some((s) => s.type === "open_mat")),
+    [cityClubs]
+  );
 
   return (
     <div className="min-h-screen bg-[#EFEDE2] text-[#1B2A20]">
@@ -846,11 +843,18 @@ export default function App() {
             <span>No clubs logged yet for {city}.</span>
           </div>
         ) : tab === "open_mat" ? (
-          <div className="space-y-4">
-            {cityClubs.map((club) => (
-              <ClubCard key={club.id} club={club} />
-            ))}
-          </div>
+          openMatClubs.length === 0 ? (
+            <div className="rounded-none border-2 border-[#1B2A20] bg-[#F6F4EC] p-6 flex items-start gap-2 text-sm italic text-[#8A6D3A]">
+              <Info size={16} className="mt-0.5 shrink-0" />
+              <span>No open mats available at this time.</span>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {openMatClubs.map((club) => (
+                <ClubCard key={club.id} club={club} />
+              ))}
+            </div>
+          )
         ) : (
           <WeekAgenda clubs={cityClubs} />
         )}
