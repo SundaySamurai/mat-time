@@ -50,6 +50,7 @@ const CLUBS = [
     coach: "",
     address: "5723 N Foster Rd, Ste 112, San Antonio, TX 78244",
     color: "#3B5B7A", // blue belt
+    phone: "(210) 993-2021",
     sessions: [
       { day: "Monday", start: "8:00 PM", end: "9:15 PM", type: "class" },
       { day: "Wednesday", start: "7:00 PM", end: "8:00 PM", type: "class" },
@@ -65,6 +66,7 @@ const CLUBS = [
     coach: "Nina Cutro-Kelly",
     address: "4523 N Loop 1604 W, Ste 103, San Antonio, TX 78249",
     color: "#6B7A3B", // green belt
+    phone: "(210) 404-9955",
     matFee: "$50 drop-in fee",
     sessions: [
       { day: "Tuesday", start: "7:15 PM", end: "8:15 PM", type: "class" },
@@ -98,6 +100,7 @@ const CLUBS = [
     coach: "",
     address: "1100 W Cesar Chavez St, Austin, TX 78703",
     color: "#3B5B7A",
+    phone: "(512) 921-3617",
     sessions: [
       { day: "Monday", start: "7:00 PM", end: "9:00 PM", type: "class" },
       { day: "Wednesday", start: "7:00 PM", end: "9:00 PM", type: "class" },
@@ -133,6 +136,7 @@ const CLUBS = [
     coach: "",
     address: "20527 FM-1093 E, Unit A-5, Richmond, TX 77407",
     color: "#8A6D3A",
+    phone: "(832) 363-7278",
     matFee: "$15 drop-in fee",
     sessions: [
       { day: "Tuesday", start: "6:30 PM", end: "7:30 PM", type: "class", label: "Kids/Beginners" },
@@ -152,6 +156,7 @@ const CLUBS = [
     coach: "",
     address: "5701 Bingle Rd, Ste. B-101, Houston, TX 77092 (inside Aikibudokan)",
     color: "#3B5B7A",
+    phone: "(281) 235-8264",
     sessions: [
       { day: "Monday", start: "7:30 PM", end: "9:30 PM", type: "class" },
       { day: "Wednesday", start: "7:30 PM", end: "9:30 PM", type: "class" },
@@ -167,6 +172,7 @@ const CLUBS = [
     coach: "",
     address: "Holy Covenant United Methodist Church, 22111 Morton Ranch Rd, Katy, TX 77449",
     color: "#6B7A3B",
+    phone: "(305) 942-0194",
     sessions: [
       { day: "Wednesday", start: "5:30 PM", end: "8:00 PM", type: "class" },
       { day: "Thursday", start: "5:30 PM", end: "8:00 PM", type: "class" },
@@ -182,6 +188,7 @@ const CLUBS = [
     coach: "",
     address: "Katy, TX",
     color: "#7A3B5B",
+    phone: "(281) 702-0789",
     sessions: [
       { day: "Tuesday", start: "7:00 PM", end: "9:00 PM", type: "class", label: "Advanced" },
       { day: "Thursday", start: "7:00 PM", end: "9:00 PM", type: "class", label: "Advanced" },
@@ -198,6 +205,7 @@ const CLUBS = [
     coach: "",
     address: "2655 Premier Dr, Plano, TX 75075",
     color: "#8A6D3A",
+    phone: "(469) 226-0088",
     sessions: [
       { day: "Monday", start: "9:00 AM", end: "10:00 AM", type: "class", label: "Adult" },
       { day: "Monday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Adult" },
@@ -224,6 +232,7 @@ const CLUBS = [
     coach: "",
     address: "331 Riverside Dr, New York, NY 10025",
     color: "#3B5B7A",
+    phone: "(212) 866-6777",
     website: "https://kokushibudo.com",
     matFee: "$40 drop-in fee",
     sessions: [
