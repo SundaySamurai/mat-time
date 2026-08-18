@@ -8,7 +8,10 @@ tabs: open mat drop-in hours, full weekly class schedules, and upcoming
 tournaments.
 
 Hours are manually verified against each club's own site/socials, not
-scraped — see the "Checked" date on each card.
+scraped — see the "Checked" date on each card. Each Class Schedule city
+also opens with a compact club directory (address with a copy button,
+phone, website) so you don't need the Open Mat tab just to get in touch
+with a club.
 
 ## Stack
 
@@ -67,6 +70,8 @@ by design — to update the site:
   bottom, so some evening sessions may be missing.
 - **Jason Morris Judo Center** (Glenville, NY): no instructor names
   listed on their site.
+- `club.phone` / `club.website` are only filled in for the clubs where a
+  source screenshot happened to show one — most clubs don't have them yet.
 - No feedback/suggestion form is wired up yet.
 
 ## Maintenance
