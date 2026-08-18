@@ -702,6 +702,9 @@ function ClubCard({ club }) {
 function ClubDirectory({ clubs }) {
   return (
     <div className="space-y-2">
+      <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#5B6B5B] mb-2">
+        Currently Available Clubs
+      </h3>
       {clubs.map((club) => (
         <div
           key={club.id}
