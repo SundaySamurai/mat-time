@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign, Copy, Check, Trophy } from "lucide-react";
+import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign, Copy, Check, Phone, Globe, Trophy } from "lucide-react";
 
 // ---- DATA ----
 // This is the only part that changes week to week.
@@ -9,6 +9,8 @@ import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign
 // consistency. Include going forward whenever a club's site mentions one. session.matFee
 // overrides it for one session (e.g. a specific free class) — shown in the Class
 // Schedule tab only.
+// club.phone / club.website: optional, e.g. "(212) 966-6850" / "https://example.com" —
+// include going forward whenever known. Both shown on the Open Mat card only.
 const CITIES = [
   "San Antonio",
   "Austin",
@@ -112,6 +114,8 @@ const CLUBS = [
     coach: "",
     address: "135 N Hewitt Dr, Ste 112, Hewitt, TX 76643",
     color: "#8A6D3A",
+    phone: "(254) 218-3754",
+    website: "https://wacojudo.com",
     sessions: [
       { day: "Monday", start: "8:30 PM", end: "9:30 PM", type: "class", label: "Adult" },
       { day: "Wednesday", start: "8:30 PM", end: "9:30 PM", type: "class", label: "Adult" },
@@ -220,6 +224,7 @@ const CLUBS = [
     coach: "",
     address: "331 Riverside Dr, New York, NY 10025",
     color: "#3B5B7A",
+    website: "https://kokushibudo.com",
     matFee: "$40 drop-in fee",
     sessions: [
       { day: "Monday", start: "12:00 PM", end: "1:00 PM", type: "class", label: "Fundamentals", instructor: "Ben Davidson" },
@@ -240,6 +245,8 @@ const CLUBS = [
     coach: "Sensei Shiro Oishi",
     address: "547 Greenwich Street, New York, NY 10013",
     color: "#3B7A6E",
+    phone: "(212) 966-6850",
+    website: "https://oishi-judo.com",
     sessions: [
       { day: "Monday", start: "6:00 PM", end: "7:00 PM", type: "class", instructor: "Andrew Pernambuco & Jeff Summa" },
       { day: "Tuesday", start: "6:00 PM", end: "7:00 PM", type: "class", instructor: "Andrew Pernambuco & Jeff Summa" },
@@ -257,6 +264,8 @@ const CLUBS = [
     coach: "",
     address: "149 West 27th Street, 1st Floor, New York, NY 10001",
     color: "#6B7A3B",
+    phone: "(917) 262-0199",
+    website: "https://kanomartialartsnyc.com",
     sessions: [
       { day: "Monday", start: "6:30 PM", end: "7:30 PM", type: "class", instructor: "Sensei Dudi" },
       { day: "Tuesday", start: "7:00 AM", end: "8:00 AM", type: "class", instructor: "Sensei Garry" },
@@ -276,6 +285,7 @@ const CLUBS = [
     coach: "",
     address: "584 Route 50, Glenville, NY 12302",
     color: "#7A3B5B",
+    website: "https://realjudo.net",
     sessions: [
       { day: "Monday", start: "6:30 PM", end: "8:30 PM", type: "class", label: "Adult" },
       { day: "Tuesday", start: "10:00 AM", end: "12:00 PM", type: "class", label: "Adult" },
@@ -298,6 +308,8 @@ const CLUBS = [
     coach: "",
     address: "10 Community Place, Suite 6, Warren, NJ 07059",
     color: "#8A6D3A",
+    phone: "(732) 718-8267",
+    website: "https://coltonbrowntrainingcenter.com",
     sessions: [
       { day: "Monday", start: "7:30 PM", end: "8:30 PM", type: "class", label: "Adult", instructor: "Colton Brown" },
       { day: "Tuesday", start: "6:40 PM", end: "7:40 PM", type: "class", label: "Teen/Adult Fundamentals", instructor: "Jeff Brown" },
@@ -317,6 +329,8 @@ const CLUBS = [
     coach: "",
     address: "107 S Ave W, Cranford, NJ 07016",
     color: "#6B7A3B",
+    phone: "(908) 276-3544",
+    website: "https://www.cranfordjkc.com",
     sessions: [
       { day: "Monday", start: "6:00 PM", end: "7:00 PM", type: "class", label: "Competition Team" },
       { day: "Monday", start: "7:00 PM", end: "8:00 PM", type: "class", label: "Adult" },
@@ -495,6 +509,11 @@ function timezoneForCity(city) {
   return city.endsWith("NJ") || city.endsWith("NY") ? "America/New_York" : "America/Chicago";
 }
 
+// All clubs are US numbers — strip formatting and add the +1 country code for tel: links.
+function telHref(phone) {
+  return `tel:+1${phone.replace(/\D/g, "")}`;
+}
+
 function pad2(n) {
   return String(n).padStart(2, "0");
 }
@@ -594,6 +613,29 @@ function ClubCard({ club }) {
         <CopyAddressButton address={club.address} color={club.color} />
       </div>
 
+      {club.phone && (
+        <div className="mt-2 flex items-start gap-2 text-sm text-[#3D4A3D]">
+          <Phone size={16} className="mt-0.5 shrink-0" />
+          <a href={telHref(club.phone)} className="underline underline-offset-2">
+            {club.phone}
+          </a>
+        </div>
+      )}
+
+      {club.website && (
+        <div className="mt-2 flex items-start gap-2 text-sm text-[#3D4A3D]">
+          <Globe size={16} className="mt-0.5 shrink-0" />
+          <a
+            href={club.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 break-all"
+          >
+            {club.website.replace(/^https?:\/\//, "")}
+          </a>
+        </div>
+      )}
+
       {club.matFee && (
         <div className="mt-2 flex items-start gap-2 text-sm text-[#3D4A3D]">
           <DollarSign size={16} className="mt-0.5 shrink-0" />
@@ -638,12 +680,53 @@ function ClubCard({ club }) {
   );
 }
 
+function ClubDirectory({ clubs }) {
+  return (
+    <div className="space-y-2">
+      {clubs.map((club) => (
+        <div
+          key={club.id}
+          className="flex items-center gap-3 border-2 border-[#1B2A20] bg-[#F6F4EC] pl-3 pr-4 py-2.5"
+          style={{ borderLeftColor: club.color, borderLeftWidth: 6 }}
+        >
+          <div className="flex-1 min-w-0">
+            <div className="font-semibold text-[#1B2A20] truncate">{club.name}</div>
+            <div className="text-xs text-[#5B6B5B] truncate">{club.address}</div>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
+            <CopyAddressButton address={club.address} color={club.color} />
+            {club.phone && (
+              <a href={telHref(club.phone)} aria-label={`Call ${club.name}`} style={{ color: club.color }}>
+                <Phone size={16} />
+              </a>
+            )}
+            {club.website && (
+              <a
+                href={club.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${club.name} website`}
+                style={{ color: club.color }}
+              >
+                <Globe size={16} />
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function WeekAgenda({ clubs }) {
   const classSessions = allSessionsByType(clubs, "class");
   const hasAny = classSessions.length > 0;
+  const todayName = DAY_ORDER[new Date().getDay()];
 
   return (
     <div className="space-y-5">
+      <ClubDirectory clubs={clubs} />
+
       {!hasAny && (
         <div className="rounded-none border-2 border-[#1B2A20] bg-[#F6F4EC] p-6 flex items-start gap-2 text-sm italic text-[#8A6D3A]">
           <Info size={16} className="mt-0.5 shrink-0" />
@@ -662,8 +745,13 @@ function WeekAgenda({ clubs }) {
 
         return (
           <div key={day}>
-            <h4 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#5B6B5B] mb-2">
+            <h4 className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#5B6B5B] mb-2">
               {day}
+              {day === todayName && (
+                <span className="text-[10px] tracking-wide font-bold px-1.5 py-0.5 bg-[#1B2A20] text-[#EFEDE2]">
+                  Today
+                </span>
+              )}
             </h4>
             <div className="space-y-2">
               {daySessions.map((s, i) => {
