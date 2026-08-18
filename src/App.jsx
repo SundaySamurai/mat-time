@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign, Trophy } from "lucide-react";
+import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign, Copy, Check, Trophy } from "lucide-react";
 
 // ---- DATA ----
 // This is the only part that changes week to week.
@@ -541,6 +541,32 @@ function googleCalendarUrl(session, club) {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
+function CopyAddressButton({ address, color }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(address);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // Clipboard API unavailable — nothing to fall back to, just skip the confirmation.
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      aria-label={copied ? "Address copied" : `Copy address: ${address}`}
+      className="shrink-0"
+      style={{ color }}
+    >
+      {copied ? <Check size={16} /> : <Copy size={16} />}
+    </button>
+  );
+}
+
 function ClubCard({ club }) {
   const openMatSessions = club.sessions.filter((s) => s.type === "open_mat");
 
@@ -564,7 +590,8 @@ function ClubCard({ club }) {
 
       <div className="mt-4 flex items-start gap-2 text-sm text-[#3D4A3D]">
         <MapPin size={16} className="mt-0.5 shrink-0" />
-        <span>{club.address}</span>
+        <span className="flex-1">{club.address}</span>
+        <CopyAddressButton address={club.address} color={club.color} />
       </div>
 
       {club.matFee && (
@@ -672,16 +699,18 @@ function WeekAgenda({ clubs }) {
                         {s.label}
                       </span>
                     )}
-                    <a
-                      href={googleCalendarUrl(s, s.club)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Add ${s.club.name} ${s.day} class to Google Calendar`}
-                      className="shrink-0"
-                      style={{ color: s.club.color }}
-                    >
-                      <CalendarPlus size={18} />
-                    </a>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <CopyAddressButton address={s.club.address} color={s.club.color} />
+                      <a
+                        href={googleCalendarUrl(s, s.club)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Add ${s.club.name} ${s.day} class to Google Calendar`}
+                        style={{ color: s.club.color }}
+                      >
+                        <CalendarPlus size={18} />
+                      </a>
+                    </div>
                   </div>
                 );
               })}
