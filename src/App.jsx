@@ -369,10 +369,11 @@ const CLUBS = [
   },
 ];
 
-// Tournaments: generic aggregated list from USA Judo's tournament locator.
-// No personal info (divisions, registration status, notes) — just what/when/where + source link.
-// Individual event pages on USA Judo's site aren't directly linkable (JS-driven locator),
-// so every entry points to the same locator page rather than a fake per-event URL.
+// Tournaments: aggregated from USA Judo's tournament locator and other sources.
+// t.sourceUrl, when present, hyperlinks the tournament name — prefer a specific event
+// registration/info page (e.g. a Smoothcomp event URL) over USAJUDO_LOCATOR below.
+// USAJUDO_LOCATOR is the fallback for entries sourced from USA Judo's locator, since
+// individual event pages there aren't directly linkable (it's a JS-driven search tool).
 const USAJUDO_LOCATOR = "https://usajudo.sport80.com/e_locator/tournaments/find";
 
 const TOURNAMENTS = [
@@ -847,7 +848,18 @@ function TournamentCard({ t }) {
     <div className="rounded-none border-2 border-[#1B2A20] bg-[#F6F4EC] p-5 sm:p-6">
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-serif text-xl sm:text-2xl leading-tight text-[#1B2A20] tracking-tight">
-          {t.name}
+          {t.sourceUrl ? (
+            <a
+              href={t.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-1 underline-offset-4 hover:decoration-2"
+            >
+              {t.name}
+            </a>
+          ) : (
+            t.name
+          )}
         </h3>
         <span className="shrink-0 text-[10px] uppercase tracking-widest font-semibold text-[#8A6D3A] border border-[#8A6D3A]/40 px-2 py-1">
           {days <= 0 ? (days === 0 ? "Today" : "In progress") : days === 1 ? "Tomorrow" : `${days} days`}
