@@ -11,6 +11,9 @@ import { MapPin, Clock, Sunrise, Info, Users, Calendar, CalendarPlus, DollarSign
 // Schedule tab only.
 // club.phone / club.website: optional, e.g. "(212) 966-6850" / "https://example.com" —
 // include going forward whenever known. Both shown on the Open Mat card only.
+// session.recurrence: "biweekly" (default is weekly) + session.startDate ("YYYY-MM-DD",
+// its first-ever occurrence) — only affects the "Add to Calendar" link (correct on/off
+// week + RRULE INTERVAL=2). Day-of-week grouping/sorting elsewhere is unaffected.
 const CITIES = [
   "San Antonio",
   "Austin",
@@ -39,10 +42,19 @@ const CLUBS = [
       { day: "Wednesday", start: "6:30 AM", end: "8:00 AM", type: "class", label: "Co-ed" },
       { day: "Wednesday", start: "6:00 PM", end: "7:30 PM", type: "class", label: "Ladies only" },
       { day: "Wednesday", start: "7:30 PM", end: "9:00 PM", type: "class", label: "Co-ed" },
+      {
+        day: "Friday",
+        start: "6:30 PM",
+        end: "8:00 PM",
+        type: "open_mat",
+        label: "Randori · Biweekly",
+        recurrence: "biweekly",
+        startDate: "2026-09-11",
+      },
       { day: "Saturday", start: "10:00 AM", end: "12:00 PM", type: "open_mat", label: "Co-ed" },
     ],
-    notes: "",
-    verified: "Aug 2026",
+    notes: "New biweekly Friday randori-only session started Sep 11, 2026 — until further notice.",
+    verified: "Sep 2026",
   },
   {
     id: "semperfortis",
@@ -554,11 +566,27 @@ function nextDateForDay(dayName) {
   return today;
 }
 
-// Google Calendar "quick add" link, pre-filled as weekly recurring — the
-// recurrence field on Google's own Add Event screen is still editable, so
-// a one-time visitor can switch it to "Does not repeat" before saving.
+// Next occurrence of a session that only runs every other week, anchored to
+// session.startDate (the first-ever occurrence) so the on/off cycle stays correct.
+function nextBiweeklyDate(startDateIso) {
+  const start = new Date(startDateIso + "T00:00:00");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  if (today <= start) return start;
+  const daysSince = Math.round((today - start) / 86400000);
+  const cyclesElapsed = Math.ceil(daysSince / 14);
+  const next = new Date(start);
+  next.setDate(start.getDate() + cyclesElapsed * 14);
+  return next;
+}
+
+// Google Calendar "quick add" link, pre-filled as weekly (or biweekly, for a
+// session with recurrence: "biweekly" + startDate) recurring — the recurrence
+// field on Google's own Add Event screen is still editable, so a one-time
+// visitor can switch it to "Does not repeat" before saving.
 function googleCalendarUrl(session, club) {
-  const date = nextDateForDay(session.day);
+  const isBiweekly = session.recurrence === "biweekly" && session.startDate;
+  const date = isBiweekly ? nextBiweeklyDate(session.startDate) : nextDateForDay(session.day);
   const dateStr = `${date.getFullYear()}${pad2(date.getMonth() + 1)}${pad2(date.getDate())}`;
   const startMin = timeToMinutes(session.start);
   const endMin = timeToMinutes(session.end);
@@ -581,7 +609,7 @@ function googleCalendarUrl(session, club) {
     details,
     location: club.address,
     ctz: timezoneForCity(club.city),
-    recur: "RRULE:FREQ=WEEKLY",
+    recur: isBiweekly ? "RRULE:FREQ=WEEKLY;INTERVAL=2" : "RRULE:FREQ=WEEKLY",
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
