@@ -46,7 +46,7 @@ const CLUBS = [
         day: "Friday",
         start: "6:30 PM",
         end: "8:00 PM",
-        type: "open_mat",
+        type: "class",
         label: "Randori · Biweekly",
         recurrence: "biweekly",
         startDate: "2026-09-11",
