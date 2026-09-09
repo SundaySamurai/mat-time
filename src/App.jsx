@@ -1049,6 +1049,16 @@ export default function App() {
             Hours are manually verified, not scraped — schedules change
             without notice, always call ahead before driving out.
           </p>
+          <p>
+            <a
+              href="https://forms.gle/E2SPjxFp1JiPWdir5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 text-[#8A6D3A] font-semibold"
+            >
+              Suggest a school, request a feature, or leave feedback
+            </a>
+          </p>
         </footer>
       </div>
     </div>
