@@ -784,6 +784,10 @@ function WeekAgenda({ clubs }) {
     <div className="space-y-5">
       <ClubDirectory clubs={clubs} />
 
+      <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#5B6B5B] mt-2 pt-4 border-t border-[#1B2A20]/15">
+        Weekly Schedule
+      </h3>
+
       {!hasAny && (
         <div className="rounded-none border-2 border-[#1B2A20] bg-[#F6F4EC] p-6 flex items-start gap-2 text-sm italic text-[#8A6D3A]">
           <Info size={16} className="mt-0.5 shrink-0" />
