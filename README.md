@@ -72,7 +72,6 @@ by design — to update the site:
   listed on their site.
 - `club.phone` / `club.website` are only filled in for the clubs where a
   source screenshot happened to show one — most clubs don't have them yet.
-- No feedback/suggestion form is wired up yet.
 
 ## Maintenance
 
