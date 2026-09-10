@@ -77,4 +77,4 @@ by design — to update the site:
 
 - Club schedules: checked quarterly
 - Tournaments: checked quarterly
-- 16 clubs across Texas, New York, and New Jersey as of Aug 2026
+- 15 clubs across Texas, New York, and New Jersey as of Sep 2026

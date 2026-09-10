@@ -73,23 +73,6 @@ const CLUBS = [
     notes: "No dedicated judo open mat found on their schedule — classes only.",
     verified: "Aug 2026",
   },
-  {
-    id: "rpbjj",
-    city: "San Antonio",
-    name: "RPBJJ",
-    coach: "Nina Cutro-Kelly",
-    address: "4523 N Loop 1604 W, Ste 103, San Antonio, TX 78249",
-    color: "#6B7A3B", // green belt
-    phone: "(210) 404-9955",
-    website: "https://rodrigopinheirobjj.com",
-    matFee: "$50 drop-in fee",
-    sessions: [
-      { day: "Tuesday", start: "7:15 PM", end: "8:15 PM", type: "class" },
-      { day: "Friday", start: "6:00 PM", end: "7:00 PM", type: "class" },
-    ],
-    notes: "No dedicated judo open mat found on their schedule — classes only.",
-    verified: "Aug 2026",
-  },
   // ---- Austin ----
   {
     id: "austin-judo-club",
